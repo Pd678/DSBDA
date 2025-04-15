@@ -1,0 +1,49 @@
+import pandas as pd
+import nltk
+import re
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+
+
+ text="Tokenization is the first step in text analytics. The process of breaking down a text paragraph into smaller chunks such as words or sentences is called Tokenization."
+
+tokenized_text=sent_tokenize(text)
+print(tokenized_text)
+tokenized_word=word_tokenize(text)
+print(tokenized_word)
+
+
+stop_words=set(stopwords.words("english"))
+print(stop_words)
+text="How to remove stop words with NLTK library in Python?"
+text=re.sub('[^a-zA-Z]',' ',text)
+tokens=word_tokenize(text.lower())
+filtered_text=[]
+for w in tokens:
+    if w not in stop_words:
+        filtered_text.append(w)
+print("Tokenized Sentence:",tokens)
+print("Filtered Sentence",filtered_text)
+
+e_words=["wait","waiting","waited","waits"]
+ps=PorterStemmer()
+for w in e_words:
+    rootWord=ps.stem(w)
+print(rootWord)
+
+
+wordnet_lemmatizer=WordNetLemmatizer()
+text="studies studying cries cry"
+tokenization=nltk.word_tokenize(text)
+for w in tokenization:
+     print("Lemma for {} is {}".format(w,wordnet_lemmatizer.lemmatize))
