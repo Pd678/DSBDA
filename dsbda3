@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df=pd.read_csv("Employee_Salary_Dataset.csv")
+print(df.dtypes)
+
+
+
+df.mean(numeric_only=True)
+df.loc[:,'Age'].mean()
+df.select_dtypes(include='number').mean(axis=1)[0:4]
+df['Gender'] = df['Gender'].map({'Male': 1, 'Female': 0})
+df.median()
+df.loc[:,'Age'].median()
+df.median(axis=1)[0:4]
+df.mode()
+df.loc[:,'Age'].mode()
+df.mode(axis=1)[0:4]
+df.min()
+df.loc[:,'Salary'].min(skipna = False)
+df.max()
+df.loc[:,'Salary'].max(skipna = False)
+df.std(numeric_only=True)
+df.loc[:,'Age'].std()
+df.std(axis=1)[0:4]
+df.groupby(['Salary'])['Age'].mean()
