@@ -1,0 +1,11 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv("iris.csv")
+data.head()
+data.shape
+data.head()
+data.tail()
+data.info()
+data.describe()
+data.isnull().sum()
+print(data.columns)
