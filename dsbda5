@@ -2,14 +2,17 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+-------------------
 df=pd.read_csv("Social_Network_Ads.csv")
 df.head()
+------------------
 X=df.iloc[:,[2,3]].values
 Y=df.iloc[:,4].values
 print(X[:3,:])
 print('-'*15)
 print(Y[:3])
-  from sklearn.model_selection import train_test_split
+---------------------
+from sklearn.model_selection import train_test_split
 
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
@@ -22,16 +25,16 @@ print('-' * 15)
 print(X_test[:3])
 print('-' * 15)
 print(y_test[:3])  
-
+------------------
 from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
-
+------------------------
 print(X_train[:3])
 print('-'*15)
 print(X_test[:3])
-
+----------------------
 from sklearn.linear_model import LogisticRegression
 classifier = LogisticRegression(random_state = 0, solver='lbfgs' )
 classifier.fit(X_train, y_train)
@@ -39,14 +42,14 @@ y_pred = classifier.predict(X_test)
 print(X_test[:10])
 print('-'*15)
 print(y_pred[:10])
-
+--------------------
 print(y_pred[:20])
 print(y_test[:20])
-
+---------------------
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
-
+---------------------
 X = df.iloc[:, [2, 3]].values
 y = df.iloc[:, 4].values
 
@@ -66,6 +69,7 @@ plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
+----------------------------
 
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
@@ -96,7 +100,7 @@ plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
 
-
+----------------------------
 
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
