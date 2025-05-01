@@ -1,43 +1,62 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+-----------------
 x=np.array([95,85,80,70,60])
 y=np.array([85,95,70,65,70])
+----------------------
 model=np.polyfit(x,y,1)
+--------------------
 model
+--------------
 predict=np.poly1d(model)
 predict(65)
+--------------------
 y_pred=predict(x)
 y_pred
+-------------
 
+from sklearn.metrics import r2_score
+r2_score(y,y_pred)
+------------------
+y_line=model[1]+model[0]*x
+plt.plot(x,y_line,c='r')
+plt.scatter(x,y_pred)
+plt.scatter(x,y,c='r')
+plt.show
+---------------
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+------------------
 data = pd.read_csv("Boston.csv")
+-----------------
 
 data.head(9)
+--------------------
 data['crim']
+--------------
 data.isnull().sum()
+-------------------
 x=data.drop(['crim'],axis=1)
 y=data['crim']
+----------------------
 
 from sklearn.model_selection import train_test_split
 xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2)
+--------------------
 
 import sklearn
 from sklearn.linear_model import LinearRegression
 lm=LinearRegression()
 model=lm.fit(xtrain,ytrain)
+----------------------
 
-import sklearn
-from sklearn.linear_model import LinearRegression
-lm=LinearRegression()
-model=lm.fit(xtrain,ytrain)
 
 ytrain_pred=lm.predict(xtrain)
 ytest_pred=lm.predict(xtest)
 
-
+-------------------
 data=(ytrain_pred,ytrain)
 data=(ytest_pred,ytest)
 
@@ -46,10 +65,10 @@ mse=mean_squared_error(ytest,ytest_pred)
 print(mse)
 mse=mean_squared_error(ytrain_pred,ytrain)
 print(mse)
-
+------------------
 mse=mean_squared_error(ytest,ytest_pred)
 print(mse)
-
+----------------------
 plt.scatter(ytrain,ytrain_pred,c='blue',marker='o',label='Training Data')
 plt.scatter(ytest,ytest_pred,c='red',marker='o',label='Testing Data')
 plt.xlabel('True Values')
