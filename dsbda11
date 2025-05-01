@@ -1,0 +1,22 @@
+// Scala program to find if the given number is POSITIVE/NEGATIVE 
+// using the "IF" statement
+
+object Sample {  
+  def main(args: Array[String]) {  
+    var num: Int = 0
+    
+    print("Enter number: ")
+    num = scala.io.StdIn.readInt()
+    
+    if (num >= 0) 
+      println("Number is POSITIVE")
+    else 
+      println("Number is NEGATIVE")
+  }
+}
+
+
+
+//scala
+//scalac filename.scala
+//scala objectname
