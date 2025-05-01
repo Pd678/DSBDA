@@ -1,0 +1,57 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+---------------
+sp=pd.read_csv("AcademicPerformanceNEW.csv")
+---------------
+sp.isnull()
+----------
+series=pd.isnull(sp["math score"])
+sp[series]
+--------------
+sp.notnull()
+------------
+series1=pd.notnull(sp["math score"])
+sp[series1]
+-------------
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+-------------
+sp.dropna()
+----------------
+sp.dropna(how='all')
+---------------
+sp.dropna(axis=1)
+----------------
+new_data=sp.dropna(axis=0,how='any')
+new_data
+---------------
+print(np.where(new_data["math score"]>90))
+-------------
+print(np.where(new_data["reading score"]<25))
+print(np.where(new_data["writing score"]<30))
+--------------
+col=['math score','reading score','placement score']
+sp.boxplot(col)
+--------------
+fig, axes = plt.subplots(figsize=(18,10))
+axes.scatter(sp['placement score'], sp['placement count'])
+plt.show()
+-------------
+print(np.where((new_data['placement score']<50)&(new_data['placement count']>1)))
+print(np.where((new_data['placement score']>85)&(new_data['placement count']<3)))
+---------------------------
+sorted_rscore=sorted(new_data['reading score'])
+-----------
+sorted_rscore
+-----------
+q1=np.percentile(sorted_rscore,25)
+q3=np.percentile(sorted_rscore,75)
+print(q1,q3)
+----------
+IQR=q3-q1
+------------
+lwr_bound=q1-(1.5*IQR)
+upr_bound=q3+(1.5*IQR)
+print(lwr_bound,upr_bound)
