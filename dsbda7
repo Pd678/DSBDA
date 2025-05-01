@@ -47,3 +47,63 @@ text="studies studying cries cry"
 tokenization=nltk.word_tokenize(text)
 for w in tokenization:
      print("Lemma for {} is {}".format(w,wordnet_lemmatizer.lemmatize))
+
+
+
+data="The pink sweater fit her perfectly"
+words=word_tokenize(data)
+for word in words:
+     print(nltk.pos_tag([word]))
+
+ import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+import math
+
+
+documentA='Jupiter is the largest Planet'
+documentB='Mars is the fourth planet from the Sun'
+bagOfWordsA=documentA.split(' ')
+bagOfWordsB=documentB.split(' ')
+uniqueWords=set(bagOfWordsA).union(set(bagOfWordsB))
+numOfWordsA=dict.fromkeys(uniqueWords,0)
+for word in bagOfWordsA:
+    numOfWordsA[word]+=1
+    numOfWordsB=dict.fromkeys(uniqueWords,0)
+for word in bagOfWordsB:
+    numOfWordsB[word]+=1
+
+
+def computeTF(wordDict,bagOfWords):
+    tfDict={}
+    bagOfWordsCount=len(bagOfWords)
+    for word, count in wordDict.items():
+        tfDict[word]=count/float(bagOfWordsCount)
+    return tfDict
+tfA=computeTF(numOfWordsA, bagOfWordsA)
+tfB=computeTF(numOfWordsB, bagOfWordsB)
+
+def computeIDF(documents):
+    N=len(documents)
+    idfDict=dict.fromkeys(documents[0].keys(),0)
+    for document in documents:
+        for word, val in document.items():
+            if val>0:
+                idfDict[word]+=1
+    for word, val in idfDict.items():
+        idfDict[word]=math.log(N/float(val))
+    return idfDict
+idfs=computeIDF([numOfWordsA,numOfWordsB])
+idfs
+
+
+def computeTFIDF(tfBagOfWords,idfs):
+    tfidf={}
+    for word, val in tfBagOfWords.items():
+        tfidf[word]=val*idfs[word]
+    return tfidf
+tfidfA=computeTFIDF(tfA,idfs)
+tfidfB=computeTFIDF(tfB,idfs)
+df=pd.DataFrame([tfidfA,tfidfB])
+
+
+df
